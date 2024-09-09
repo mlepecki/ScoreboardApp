@@ -1,6 +1,9 @@
 package org.scoreboard.service;
 
+import org.scoreboard.domain.Match;
 import org.scoreboard.domain.Team;
+
+import java.util.List;
 
 public interface Scoreboard {
     /**
@@ -10,4 +13,10 @@ public interface Scoreboard {
      * @return matchID - unique identifier for specific match
      */
     String startMatch(Team homeTeam, Team awayTeam);
+
+    /**
+     * Method return report of the matches currently in progress
+     * @return - List of matches currently in progress
+     */
+    List<Match> getReport();
 }

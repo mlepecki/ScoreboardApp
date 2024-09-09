@@ -5,6 +5,7 @@ import org.scoreboard.domain.Team;
 import org.scoreboard.service.Scoreboard;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class ScoreboardImpl implements Scoreboard {
@@ -19,5 +20,9 @@ public class ScoreboardImpl implements Scoreboard {
         final Match newMatch = new Match(homeTeam, awayTeam);
         matchesInProgress.add(newMatch);
         return newMatch.getId();
+    }
+
+    public List<Match> getReport() {
+        return matchesInProgress;
     }
 }
