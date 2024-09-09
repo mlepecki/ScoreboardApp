@@ -4,12 +4,12 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static util.TeamFixture.TEAM_A;
+import static util.TeamFixture.TEAM_B;
+
+//In my opinion below tests can be skip because we will test it during main class testing
 
 public class TeamTest {
-
-
-    public static final Team TEAM_A = new Team("Team A");
-    public static final Team TEAM_B = new Team("Team B");
 
     @Test
     public void testsCompareTwoTeams() {

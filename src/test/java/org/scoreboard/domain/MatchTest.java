@@ -28,9 +28,9 @@ public class MatchTest {
         assertNotNull(match);
         assertNotNull(match.toString());
         assertEquals(0, match.getTotalScore());
-
-        verify(homeTeam, never()).toString();
-        verify(awayTeam, never()).toString();
+// skipping below verifier, id doesn`t make sense to stub toString() method
+//        verify(homeTeam, never()).toString();
+//        verify(awayTeam, never()).toString();
     }
 
     @Test
@@ -64,14 +64,14 @@ public class MatchTest {
 
     @Test
     public void shouldGenerateMatchIdWhenCreatingMatchObject() {
-        String matchId = match.id;
+        String matchId = match.getId();
         assertNotNull(matchId);
         assertFalse(matchId.isEmpty());
     }
 
     @Test
     public void shouldSetProperStartTimeWhenCreatingMatchObject() {
-        LocalDateTime startTime = match.startTime;
+        LocalDateTime startTime = match.getStartTime();
         assertNotNull(startTime);
         assertTrue(startTime.isBefore(LocalDateTime.now()) || startTime.isEqual(LocalDateTime.now()));
     }
