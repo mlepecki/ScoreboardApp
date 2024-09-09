@@ -26,6 +26,11 @@ public class ScoreboardImpl implements Scoreboard {
     }
 
     public List<Match> getReport() {
+        matchesInProgress.sort(Comparator
+                .comparingInt(Match::getTotalScore)
+                .thenComparing(Match::getStartTime)
+                .reversed());
+
         return matchesInProgress;
     }
 
