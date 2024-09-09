@@ -64,4 +64,19 @@ public class ScoreboardTest {
     public void shouldThrowExceptionWhenUpdatingScoreForNonExistingMatch() {
         scoreboardImpl.updateScore(INVALID_MATCH_ID, 3, 2);
     }
+
+    @Test
+    public void shouldFinishMatch() {
+        String matchId1 = scoreboardImpl.startMatch(TEAM_A, TEAM_B);
+
+        scoreboardImpl.finishMatch(matchId1);
+
+        List<Match> matches = scoreboardImpl.getReport();
+        assertEquals(0, matches.size());
+    }
+
+    @Test(expected = MatchNotFoundException.class)
+    public void shouldThrowAnExceptionWhenFinishingNonExistingMatch() {
+        scoreboardImpl.finishMatch("invalid-id");
+    }
 }
