@@ -3,6 +3,8 @@ package org.scoreboard.service.impl;
 import org.junit.Before;
 import org.junit.Test;
 import org.scoreboard.domain.Match;
+import org.scoreboard.exception.IllegalScoreException;
+import org.scoreboard.exception.MatchNotFoundException;
 import org.scoreboard.service.Scoreboard;
 
 import java.util.List;
@@ -48,12 +50,14 @@ public class ScoreboardTest {
 
     @Test(expected = IllegalScoreException.class)
     public void shouldThrowExceptionWhenNegativeScoreForHomeTeam() {
-        scoreboardImpl.updateScore(INVALID_MATCH_ID, -1, 2);
+        String matchId = scoreboardImpl.startMatch(TEAM_A, TEAM_B);
+        scoreboardImpl.updateScore(matchId, -1, 2);
     }
 
     @Test(expected = IllegalScoreException.class)
     public void shouldThrowExceptionWhenNegativeScoreForAwayTeam() {
-        scoreboardImpl.updateScore(INVALID_MATCH_ID, 1, -2);
+        String matchId = scoreboardImpl.startMatch(TEAM_A, TEAM_B);
+        scoreboardImpl.updateScore(matchId, 1, -2);
     }
 
     @Test(expected = MatchNotFoundException.class)

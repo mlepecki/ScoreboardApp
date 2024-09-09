@@ -2,11 +2,14 @@ package org.scoreboard.service.impl;
 
 import org.scoreboard.domain.Match;
 import org.scoreboard.domain.Team;
+import org.scoreboard.exception.IllegalScoreException;
+import org.scoreboard.exception.MatchNotFoundException;
 import org.scoreboard.service.Scoreboard;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 public class ScoreboardImpl implements Scoreboard {
     private final List<Match> matchesInProgress;
@@ -24,5 +27,25 @@ public class ScoreboardImpl implements Scoreboard {
 
     public List<Match> getReport() {
         return matchesInProgress;
+    }
+
+    @Override
+    public void updateScore(String matchId, int homeScore, int awayScore) {
+        final Optional<Match> match = findMatchById(matchId);
+        if (match.isPresent()) {
+            if (homeScore < 0 || awayScore < 0) {
+                throw new IllegalScoreException("Scores cannot be negative.");
+            }
+            match.get().updateScore(homeScore, awayScore);
+        } else {
+            throw new MatchNotFoundException("Match with ID " + matchId + " not found.");
+        }
+    }
+
+
+    private Optional<Match> findMatchById(String matchId) {
+        return matchesInProgress.stream()
+                .filter(match -> match.getId().equals(matchId))
+                .findFirst();
     }
 }

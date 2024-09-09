@@ -19,4 +19,13 @@ public interface Scoreboard {
      * @return - List of matches currently in progress
      */
     List<Match> getReport();
+
+    /**
+     * This method is updating match score. When provided number is negative, then {@link org.scoreboard.exception.IllegalScoreException} is thrown.
+     * When match is not find, then {@link org.scoreboard.exception.MatchNotFoundException} will be thrown
+     * @param matchId
+     * @param homeScore
+     * @param awayScore
+     */
+    void updateScore(String matchId, int homeScore, int awayScore);
 }
