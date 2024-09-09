@@ -32,7 +32,7 @@ public interface Scoreboard {
     void updateScore(String matchId, int homeScore, int awayScore);
 
     /**
-     * This method is finishing the match. When match is not find, then {@link org.excercise.exception.MatchNotFoundException} will be thrown
+     * This method is finishing the match. When match is not find, then {@link org.scoreboard.exception.MatchNotFoundException} will be thrown
      * @param matchId
      */
     void finishMatch(String matchId);

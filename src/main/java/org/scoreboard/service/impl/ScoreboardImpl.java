@@ -11,7 +11,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-public class ScoreboardImpl implements Scoreboard {
+class ScoreboardImpl implements Scoreboard {
     private final List<Match> matchesInProgress;
 
     public ScoreboardImpl() {
