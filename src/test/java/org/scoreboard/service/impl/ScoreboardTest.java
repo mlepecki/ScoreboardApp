@@ -68,9 +68,7 @@ public class ScoreboardTest {
     @Test
     public void shouldFinishMatch() {
         String matchId1 = scoreboardImpl.startMatch(TEAM_A, TEAM_B);
-
         scoreboardImpl.finishMatch(matchId1);
-
         List<Match> matches = scoreboardImpl.getReport();
         assertEquals(0, matches.size());
     }

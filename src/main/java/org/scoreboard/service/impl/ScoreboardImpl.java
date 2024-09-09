@@ -48,4 +48,11 @@ public class ScoreboardImpl implements Scoreboard {
                 .filter(match -> match.getId().equals(matchId))
                 .findFirst();
     }
+
+    public void finishMatch(String matchId) {
+        boolean matchRemoved = matchesInProgress.removeIf(match -> match.getId().equals(matchId));
+        if (!matchRemoved) {
+            throw new MatchNotFoundException("Match with ID " + matchId + " not found.");
+        }
+    }
 }
