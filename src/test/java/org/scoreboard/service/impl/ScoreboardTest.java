@@ -13,6 +13,7 @@ import static util.TeamFixture.*;
 
 public class ScoreboardTest {
 
+    public static final String INVALID_MATCH_ID = "XYZ";
     private Scoreboard scoreboardImpl;
 
     @Before
@@ -35,4 +36,28 @@ public class ScoreboardTest {
         assertEquals(2, matches.size());
     }
 
+    @Test
+    public void shouldUpdateScoreForTheMatch() {
+        String matchId = scoreboardImpl.startMatch(TEAM_A, TEAM_B);
+        scoreboardImpl.updateScore(matchId, 3, 2);
+
+        List<Match> matches = scoreboardImpl.getReport();
+        assertEquals(matchId, matches.getFirst().getId());
+        assertEquals(5, matches.getFirst().getTotalScore());
+    }
+
+    @Test(expected = IllegalScoreException.class)
+    public void shouldThrowExceptionWhenNegativeScoreForHomeTeam() {
+        scoreboardImpl.updateScore(INVALID_MATCH_ID, -1, 2);
+    }
+
+    @Test(expected = IllegalScoreException.class)
+    public void shouldThrowExceptionWhenNegativeScoreForAwayTeam() {
+        scoreboardImpl.updateScore(INVALID_MATCH_ID, 1, -2);
+    }
+
+    @Test(expected = MatchNotFoundException.class)
+    public void shouldThrowExceptionWhenUpdatingScoreForNonExistingMatch() {
+        scoreboardImpl.updateScore(INVALID_MATCH_ID, 3, 2);
+    }
 }
