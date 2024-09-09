@@ -2,6 +2,7 @@ package org.scoreboard.service.impl;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.scoreboard.service.Scoreboard;
 
 import static org.junit.Assert.assertNotNull;
 import static util.TeamFixture.TEAM_A;
