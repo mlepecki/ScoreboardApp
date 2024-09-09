@@ -77,6 +77,6 @@ public class ScoreboardTest {
 
     @Test(expected = MatchNotFoundException.class)
     public void shouldThrowAnExceptionWhenFinishingNonExistingMatch() {
-        scoreboardImpl.finishMatch("invalid-id");
+        scoreboardImpl.finishMatch(INVALID_MATCH_ID);
     }
 }
